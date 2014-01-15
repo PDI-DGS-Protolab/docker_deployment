@@ -11,7 +11,8 @@ Give execution permissions to autoDeployIni.sh and execute the script.
 
 
 ###Configuration Parameters
-The file **autoDeployParams.conf** must follow the following syntax, all values are asigned **without ""**:
+The file **autoDeployParams.conf** must follow the following syntax, all values are asigned **without ""** and no punctuation marks between lines:
+
 GITHUB_URL=*The URL to the GIT project*<br />
 BRANCH=*The branch of the project to use*<br />
 CONTAINER_TAG=*The tag that should be used to identify the image in Docker*<br />
