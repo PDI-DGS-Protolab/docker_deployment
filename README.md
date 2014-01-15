@@ -10,7 +10,7 @@ Script to auto deploy github projects in Docker
 
 ######Configuration Parameters
 The file **autoDeployParams.conf** must follow the following syntax, all values are asigned **without ""**:
-GITHUB_URL=The URL to the GIT project
+GITHUB_URL=The URL to the GIT project <br />
 BRANCH=The branch of the project to use
 CONTAINER_TAG=The tag that should be used to identify the image in Docker
 LOCAL_PORT=The port to which all request will be redirected from the container port
