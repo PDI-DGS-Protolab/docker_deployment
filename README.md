@@ -1,25 +1,24 @@
-#Docker Auto Deployment
+#Docker Auto Deployment in Python
 ======
 
-Python script to auto deploy github projects in Docker
+Python program to auto deploy github projects in Docker
 
 
 ###How to
-Give execution permissions to autoDeployIni.sh and execute the script. The param config_file is the file with the parameters to run the script.
+Give execution permissions to autoDeployIni.py and execute the file. If the _-o_ option is set then the program will kill any processes running in Docker that are using the LOCAL_PORT stated in the configuration file.
 
-**Usage**: ./autoDeployIni.sh config_file
+**Usage**: ./autoDeployIni.sh [-o] _configurationFile_
+
 
 ###Configuration Parameters
-The configuration file  must follow the following syntax, all values are asigned **without ""** and no punctuation marks between lines:
+The file _configurationFile_ must follow the following syntax, all values are asigned **without "" or ''**, no punctuation marks between lines and no spaces between = and values:
 
-GITHUB_URL=*The URL to the GIT project*  
+GITHUB_URL=*The URL to the GIT project, without .git extension*  
 BRANCH=*The branch of the project to use*  
 CONTAINER_TAG=*The tag that should be used to identify the image in Docker*  
 LOCAL_PORT=*The port to which all request will be redirected from the container port*  
 CONTAINER_PORT=*The port from the container that will be emitting*  
-SSH_ADDR=*SSH address to the remote machine*
-SSH_PORT=*SSH port to the remote machine*
-SSH_USER=*SSH user to the remote machine*
-SSH_PASS=*SSH user password to the remote machine*
-SSH_CREDS=*SSH credentials to access said machine*  
-ENV_VARS=*Not suported yet*
+SSH_ADDRESS=*SSH ip address to the remote machine* 
+SSH_USER=*SSH username to the remote machine* 
+SSH_CREDENTIALS=*SSH key file to access said machine*  
+ENVIRONMENT_VARS=All environment vars that may be needed for the project*
