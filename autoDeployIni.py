@@ -43,7 +43,9 @@ def execute_autoDeploy(params):
 		print prompt + 'sftp open'
 		sftp = ssh.open_sftp()
 		print prompt + 'copy autoDeploy.sh -> /tmp/autoDeploy.sh'
-		sftp.put('autoDeploy.sh', '/tmp/autoDeploy.sh')		
+		sftp.put('autoDeploy.sh', '/tmp/autoDeploy.sh')
+		print prompt + 'sftp close'	
+		sftp.close()	
 		print prompt + 'chmod 775 /tmp/autoDeploy.sh'
 		exec_command_print(ssh, 'chmod 755 /tmp/autoDeploy.sh')
 		print prompt + './autoDeploy.sh ' + ssh_params
@@ -62,8 +64,8 @@ def execute_autoDeploy(params):
 		print str(e)
 
 def main():
-	if (len(sys.argv) < 2 | len(sys.argv) > 3):
-		print usage()
+	if (len(sys.argv) < 2) | (len(sys.argv) > 3):
+		usage()
 	else:
 		try:
 			path = sys.argv[1]
@@ -86,13 +88,12 @@ def main():
 			conf_file.close()
 
 			if cont != EXPECTED_ARGS:
-				error_file('ERROR: bad number of arguments in ' + sys.argv[1])
+				error_file('ERROR: bad number of arguments in "' + path + '"')
 			else:
 				execute_autoDeploy(params)
 
 		except (OSError, IOError), e:
-			error_file('ERROR: File ' + sys.argv[1] + ' do not exists')
-			print e
+			error_file('ERROR: File "' + path + '" do not exists')
 
 if __name__ == '__main__':
 	main()
