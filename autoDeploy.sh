@@ -24,7 +24,9 @@ git clone -b "$BRANCH" "$GITHUB_URL"
 cd "$PROJECT_NAME"/DockerSetup
 sudo docker build -t $CONT_TAG .
 if [[ -z "$ENV_VARS" ]]; then
+    # without_ENV_VARS
 	sudo docker run -d -p "$LOCAL_PORT":"$CONT_PORT" $CONT_TAG
 else 
-	sudo docker run -d -p "$LOCAL_PORT":"$CONT_PORT" $CONT_TAG -e "$ENV_VARS"
+    # with ENV_VARS
+	sudo docker run $ENV_VARS -d -p "$LOCAL_PORT":"$CONT_PORT" -t $CONT_TAG 
 fi

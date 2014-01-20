@@ -12,8 +12,14 @@ if [ $PARAMS -lt "$expected_args" ]; then
   	exit 1
 else
 	if [ $PARAMS -gt "$expected_args" ]; then 
+		for item in ${ENV_VARS[*]}
+    	do 
+        	ENV_LIST+="-e "
+        	ENV_LIST+=$item
+        	ENV_LIST+=" "
+    	done
 		cat autoDeploy.sh | ssh $SSH_ADDR -i $SSH_CREDS "cat > /tmp/autoDeploy.sh ; 
-		chmod 755 /tmp/autoDeploy.sh ; /tmp/autoDeploy.sh $GITHUB_URL $BRANCH $CONT_TAG $LOCAL_PORT $CONT_PORT $OVERRIDE $ENV_VARS"
+		chmod 755 /tmp/autoDeploy.sh ; /tmp/autoDeploy.sh $GITHUB_URL $BRANCH $CONT_TAG $LOCAL_PORT $CONT_PORT $OVERRIDE '$ENV_LIST'"
 	else 
 		cat autoDeploy.sh | ssh $SSH_ADDR -i $SSH_CREDS "cat > /tmp/autoDeploy.sh ; 
 		chmod 755 /tmp/autoDeploy.sh ; /tmp/autoDeploy.sh $GITHUB_URL $BRANCH $CONT_TAG $LOCAL_PORT $CONT_PORT $OVERRIDE"
