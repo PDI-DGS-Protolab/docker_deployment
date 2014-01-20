@@ -6,15 +6,20 @@ ZERO=0
 
 if [[ "$COUNT" -ne $ZERO ]]; then
 	if [[ -z $OVERRIDE ]]; then
-    	echo "The port $LOCAL_PORT is already in use. To kill the process and deploy execute with option -o."
+    	echo "The port $LOCAL_PORT is already in use. To kill the process, the image and deploy execute with option -o."
     	exit 1
     else
     	#kill process and proceed
-    	PORT_LENGTH=$((${#LOCAL_PORT} + 1))
-    	DOTTED_LP=":$LOCAL_PORT"
+    	LOCAL_PORT_STRING=":$LOCAL_PORT->"
+        
+        PROCESS_IMAGE=`sudo docker ps | grep $LOCAL_PORT_STRING | awk '{print $1, $2}'`
 
-    	PROCESS_ID=`sudo docker ps | awk -v pl=$PORT_LENGTH -v lp=$DOTTED_LP '(substr($13,8,pl)==lp){print $1}'`
-    	sudo docker kill $PROCESS_ID
+        PROCESS_IMAGE_ARRAY=($PROCESS_IMAGE)
+        PROCESS_ID=${PROCESS_IMAGE_ARRAY[0]}
+        IMAGE_ID=${PROCESS_IMAGE_ARRAY[1]}
+    	sudo docker stop $PROCESS_ID
+        sudo docker rm `docker ps -a -q`
+        sudo docker rmi $IMAGE_ID
     fi
 fi
 IFS=/ read -a SPLIT_URL <<< "$GITHUB_URL"
