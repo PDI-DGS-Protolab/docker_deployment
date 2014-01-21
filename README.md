@@ -5,8 +5,8 @@ Script to auto deploy github projects in Docker
 
 
 ###How to
-Give execution permissions to autoDeployIni.sh and execute the script. If the _-o_ option is set then the script will kill any processes running in Docker that are using the LOCAL_PORT stated in the configuration file, and also will remove any previous image created with name *CONTAINER_TAG*, and so start all over creating a new image, without using the cache, downloading any changes that may have been done in the code.   
-Option _-o_ will not work if there's another container, in another LOCAL_PORT using the same image.
+Give execution permissions to autoDeployIni.sh and execute the script. If the _-o_ option is set then the script will kill any processes running in Docker that are using the *LOCAL_PORT* stated in the configuration file, and also will remove any previous image created with name *CONTAINER_TAG*, and so start all over creating a new image, without using the cache, downloading any changes that may have been done in the code.   
+Option *-o* will not work if there's another container, in another *LOCAL_PORT* using the same image.
 
 **Usage**: ./autoDeployIni.sh _-o_ 
 
