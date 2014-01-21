@@ -6,8 +6,7 @@ CONFIG_FILE=autoDeployParams.conf
 if [[ -f $CONFIG_FILE ]]; then
         . $CONFIG_FILE
 fi
-PARAMS=`wc -l < $CONFIG_FILE`
-let PARAMS++
+PARAMS=`grep -v '^\s*$' $CONFIG_FILE | wc -l`
 if [ $PARAMS -lt "$expected_args" ]; then
   	echo "Usage: autoDeployIni.sh, use -o if you want to proceed if the port is already in use || configure parameters GITHUB_URL BRANCH CONTAINER_TAG LOCAL_PORT CONTAINER_PORT SSH_ADDRESS SSH_CREDENTIALS [ENVIRONMENT_VARS] in autoDeployParams.conf"
   	exit 1
