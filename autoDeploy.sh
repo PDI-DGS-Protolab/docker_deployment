@@ -1,6 +1,5 @@
 #!/bin/bash
 GITHUB_URL="$1";BRANCH="$2";CONT_TAG="$3";LOCAL_PORT="$4";CONT_PORT="$5";OVERRIDE="$6";ENV_VARS="$7";
-
 COUNT=`sudo lsof -i ":$LOCAL_PORT" | wc -c`
 ZERO=0
 
